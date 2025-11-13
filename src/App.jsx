@@ -1,16 +1,11 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import Navbar from "./Navbar"
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-     
-   
-      <h1>Collab_me</h1>
+        <Navbar/>
+       <button class="btn w-64 rounded-full">Button</button>
     </>
   )
 }
