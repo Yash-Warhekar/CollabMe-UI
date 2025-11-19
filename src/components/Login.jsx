@@ -1,16 +1,28 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
-
+import {  useSelector } from 'react-redux'
 
 const Login = () => {
+  
   let [emailId, setEmail] = useState("virat@gmail.com");
   let [password, setPassword] = useState("Yash@2003");
+  let [error,setError]=useState('')
   const dispatch = useDispatch();
   const navigate=useNavigate()
+
+  // get user from redux store
+  // const userStoreData = useSelector((store) => store.user.user);
+   // 🔥 If user is already logged in → redirect
+  // useEffect(() => {
+  //   if (userStoreData) {
+  //     navigate("/");
+  //   }
+  // }, [userStoreData, navigate]);
+
   const handleLogin = async () => {
     try {
       const data = { emailId, password };
@@ -21,6 +33,7 @@ const Login = () => {
       dispatch(addUser(res.data)); //outlet calling add user
       navigate('/') //navigate to main page(feed page)
     } catch (err) {
+      setError(err?.response?.data || "Something went wrong")
       console.error(err);
     }
   };
@@ -92,6 +105,7 @@ const Login = () => {
           </p>
           <div className="validator-hint hidden">Enter valid email address</div>
           <div className="card-actions justify-center mt-1.5">
+            <p className="text-red-600">{error}</p>
             <button className="btn btn-primary" onClick={handleLogin}>
               Login
             </button>
