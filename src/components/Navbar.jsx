@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom';
 import { BASE_URL } from '../utils/constants';
 import { removeUser } from '../utils/userSlice';
+import { removeFeed } from '../utils/feedSlice';
 const Navbar = () => {
   const user= useSelector((state)=>state.user.user);
   const dispatch=useDispatch();
@@ -11,7 +12,8 @@ const Navbar = () => {
   const handleLogout=async()=>{
     try{
       await axios.post(BASE_URL+'/logout',{},{withCredentials:true});
-      dispatch(removeUser())
+      dispatch(removeUser());
+      dispatch(removeFeed());
       return navigate('/login')
     }catch(err){
       //we can redirect to user page
@@ -53,7 +55,19 @@ const Navbar = () => {
                 <span className="badge">New</span>
             </Link>
             </li>
-            <li><a>Settings</a></li>
+            <li>
+            <Link to='/connections' className="justify-between">
+                Connections
+                
+            </Link>
+            </li>
+            <li>
+            <Link to='/requests' className="justify-between">
+                Requests
+                <span className="badge">Interests you</span>
+            </Link>
+            </li>
+            
             <li><a onClick={handleLogout}>Logout</a></li>
         </ul>
         </div>
