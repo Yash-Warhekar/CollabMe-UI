@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { BASE_URL } from '../utils/constants';
 import { removeUser } from '../utils/userSlice';
 import { removeFeed } from '../utils/feedSlice';
+import { removeConnections } from '../utils/connectionsSlice';
 const Navbar = () => {
   const user= useSelector((state)=>state.user.user);
   const dispatch=useDispatch();
@@ -14,6 +15,7 @@ const Navbar = () => {
       await axios.post(BASE_URL+'/logout',{},{withCredentials:true});
       dispatch(removeUser());
       dispatch(removeFeed());
+      dispatch(removeConnections)
       return navigate('/login')
     }catch(err){
       //we can redirect to user page
