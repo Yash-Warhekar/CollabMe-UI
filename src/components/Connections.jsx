@@ -23,10 +23,11 @@ const Connections = () => {
   }, []);
 
   // console.log("this " +connections)
-  if (!connections) return;
+  // if () return;
 
-  if (connections.length === 0) return <h1> No connections found</h1>;
-
+  if (!connections || connections.length === 0) {
+    return <h1 className="flex justify-center my-10"> No connections found</h1>;
+  }
   return (
     <div className="w-1/2 justify-center m-auto my-3.5">
         <ul className="list bg-base-100 rounded-box shadow-md">
