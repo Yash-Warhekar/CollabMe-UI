@@ -15,7 +15,7 @@ const Navbar = () => {
       await axios.post(BASE_URL+'/logout',{},{withCredentials:true});
       dispatch(removeUser());
       dispatch(removeFeed());
-      dispatch(removeConnections)
+      dispatch(removeConnections())
       return navigate('/login')
     }catch(err){
       //we can redirect to user page

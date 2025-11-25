@@ -71,12 +71,12 @@ const Requests = () => {
     <div className="w-1/2 justify-center m-auto my-3.5">
       <ul className="list bg-base-100 rounded-box shadow-md">
         <li className="p-4 pb-2 text-2xl opacity-60 tracking-wide">
-          Your's Connections
+          Your's Requests
         </li>
         {requests.map((request) => {
           const { firstName, lastName, age, gender, about, profile } =
             request.fromUserId;
-          console.log(request._id);
+          console.log(request.fromUserId.gender);
           console.log(request);
           return (
             <li key={request._id} className="list-row">
@@ -85,11 +85,11 @@ const Requests = () => {
               </div>
               <div>
                 <div>{firstName + " " + lastName}</div>
-                {age && gender && (
+                {
                   <div className="text-xs uppercase font-semibold opacity-60">
-                    {gender + " " + age}
+                    {gender?gender:'Na' + " " + age?age:'Na'}
                   </div>
-                )}
+                }
               </div>
               <p className="list-col-wrap text-xs">{about}</p>
               <div className=" flex gap-5">
